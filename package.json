@@ -20,7 +20,7 @@
         "copy_static_files": "cp -r package.json README.md LICENSE tsconfig.json typings.json typings dist/",
         "copy_static_files_prod": "cp -r package.json README.md LICENSE tsconfig.json typings.json typings aot/",
         "dev": "tsc --watch",
-        "postinstall": "typings install && cp -r dist / && rm -rf dist"
+        "postinstall": "typings install && cp -r dist /"
     },
     "main": "index.js",
     "dependencies": {},
