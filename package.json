@@ -22,7 +22,7 @@
         "dev": "tsc --watch",
         "postinstall": "typings install"
     },
-    "main": "./dist/index.js",
+    "main": "dist/index.js",
     "dependencies": {},
     "devDependencies": {
         "tslint-ionic-rules": "0.0.5",
