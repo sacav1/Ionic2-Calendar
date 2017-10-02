@@ -260,7 +260,7 @@ import { IDisplayAllDayEvent } from "./calendar";
 
         .calendar-event {
           position: absolute;
-          padding: 2px;
+          padding: 0;
           cursor: pointer;
           z-index: 10000;
         }
@@ -649,7 +649,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
                 let startOffset = 0;
                 let endOffset = 0;
                 if (this.hourParts !== 1) {
-                    startOffset = Math.floor((timeDifferenceStart - startIndex) * this.hourParts);
+                    startOffset = Math.round((timeDifferenceStart - startIndex) * this.hourParts);
                     endOffset = Math.floor((endIndex - timeDifferenceEnd) * this.hourParts);
                 }
 
@@ -740,7 +740,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
             return false;
         } else {
-            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset > this.hourParts);
+            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
     }
 
