@@ -1,8 +1,19 @@
 "use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var calendar_service_1 = require('./calendar.service');
-var MonthViewComponent = (function () {
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
+var ionic_angular_1 = require("ionic-angular");
+var calendar_service_1 = require("./calendar.service");
+var MonthViewComponent = MonthViewComponent_1 = (function () {
     function MonthViewComponent(calendarService) {
         this.calendarService = calendarService;
         this.autoSelect = true;
@@ -153,7 +164,7 @@ var MonthViewComponent = (function () {
     };
     MonthViewComponent.prototype.getViewData = function (startTime) {
         var startDate = startTime, date = startDate.getDate(), month = (startDate.getMonth() + (date !== 1 ? 1 : 0)) % 12;
-        var dates = MonthViewComponent.getDates(startDate, 42);
+        var dates = MonthViewComponent_1.getDates(startDate, 42);
         var days = [];
         for (var i = 0; i < 42; i++) {
             var dateObject = this.createDateObject(dates[i]);
@@ -401,41 +412,104 @@ var MonthViewComponent = (function () {
     MonthViewComponent.prototype.eventSelected = function (event) {
         this.onEventSelected.emit(event);
     };
-    MonthViewComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'monthview',
-                    template: "\n        <div>\n            <ion-slides #monthSlider [loop]=\"true\" [dir]=\"dir\" (ionSlideDidChange)=\"onSlideChanged()\">\n                <ion-slide>\n                    <table *ngIf=\"0===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[0].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[0].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[0].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[0], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"0!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[0].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[0], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n                <ion-slide>\n                    <table *ngIf=\"1===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[1].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[1].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[1].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[1], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"1!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[1].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[1], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n                <ion-slide>\n                    <table *ngIf=\"2===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[2].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[2].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[2].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[2], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"2!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[2].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[2], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n            </ion-slides>\n            <template [ngTemplateOutlet]=\"monthviewEventDetailTemplate\"\n            [ngOutletContext]=\"{showEventDetail:showEventDetail, selectedDate: selectedDate, noEventsLabel: noEventsLabel}\">\n            </template>\n        </div>\n    ",
-                    styles: ["\n        .text-muted {\n          color: #999;\n        }\n\n        .table-fixed {\n          table-layout: fixed;\n        }\n\n        .table {\n          width: 100%;\n          max-width: 100%;\n          background-color: transparent;\n        }\n\n        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td,\n        .table > tbody > tr > td, .table > tfoot > tr > td {\n          padding: 8px;\n          line-height: 20px;\n          vertical-align: top;\n        }\n\n        .table > thead > tr > th {\n          vertical-align: bottom;\n          border-bottom: 2px solid #ddd;\n        }\n\n        .table > thead:first-child > tr:first-child > th, .table > thead:first-child > tr:first-child > td {\n          border-top: 0\n        }\n\n        .table > tbody + tbody {\n          border-top: 2px solid #ddd;\n        }\n\n        .table-bordered {\n          border: 1px solid #ddd;\n        }\n\n        .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th,\n        .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {\n          border: 1px solid #ddd;\n        }\n\n        .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {\n          border-bottom-width: 2px;\n        }\n\n        .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {\n          background-color: #f9f9f9\n        }\n\n        .monthview-primary-with-event {\n          background-color: #3a87ad;\n          color: white;\n        }\n\n        .monthview-current {\n          background-color: #f0f0f0;\n        }\n\n        .monthview-selected {\n          background-color: #009900;\n          color: white;\n        }\n\n        .monthview-datetable td.monthview-disabled {\n            color: lightgrey;\n            cursor: default;\n        }\n\n        .monthview-datetable th {\n          text-align: center;\n        }\n\n        .monthview-datetable td {\n          cursor: pointer;\n          text-align: center;\n        }\n\n        .monthview-secondary-with-event {\n          background-color: #d9edf7;\n        }\n\n        ::-webkit-scrollbar,\n        *::-webkit-scrollbar {\n          display: none;\n        }\n    "]
-                },] },
-    ];
-    MonthViewComponent.ctorParameters = function () { return [
-        { type: calendar_service_1.CalendarService, },
-    ]; };
-    MonthViewComponent.propDecorators = {
-        'slider': [{ type: core_1.ViewChild, args: ['monthSlider',] },],
-        'monthviewDisplayEventTemplate': [{ type: core_1.Input },],
-        'monthviewInactiveDisplayEventTemplate': [{ type: core_1.Input },],
-        'monthviewEventDetailTemplate': [{ type: core_1.Input },],
-        'formatDay': [{ type: core_1.Input },],
-        'formatDayHeader': [{ type: core_1.Input },],
-        'formatMonthTitle': [{ type: core_1.Input },],
-        'eventSource': [{ type: core_1.Input },],
-        'startingDayMonth': [{ type: core_1.Input },],
-        'showEventDetail': [{ type: core_1.Input },],
-        'noEventsLabel': [{ type: core_1.Input },],
-        'autoSelect': [{ type: core_1.Input },],
-        'markDisabled': [{ type: core_1.Input },],
-        'locale': [{ type: core_1.Input },],
-        'dateFormatter': [{ type: core_1.Input },],
-        'dir': [{ type: core_1.Input },],
-        'lockSwipeToPrev': [{ type: core_1.Input },],
-        'lockSwipes': [{ type: core_1.Input },],
-        'onRangeChanged': [{ type: core_1.Output },],
-        'onEventSelected': [{ type: core_1.Output },],
-        'onTimeSelected': [{ type: core_1.Output },],
-        'onTitleChanged': [{ type: core_1.Output },],
-    };
     return MonthViewComponent;
 }());
+__decorate([
+    core_1.ViewChild('monthSlider'),
+    __metadata("design:type", ionic_angular_1.Slides)
+], MonthViewComponent.prototype, "slider", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", core_1.TemplateRef)
+], MonthViewComponent.prototype, "monthviewDisplayEventTemplate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", core_1.TemplateRef)
+], MonthViewComponent.prototype, "monthviewInactiveDisplayEventTemplate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", core_1.TemplateRef)
+], MonthViewComponent.prototype, "monthviewEventDetailTemplate", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "formatDay", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "formatDayHeader", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "formatMonthTitle", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], MonthViewComponent.prototype, "eventSource", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], MonthViewComponent.prototype, "startingDayMonth", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], MonthViewComponent.prototype, "showEventDetail", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "noEventsLabel", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], MonthViewComponent.prototype, "autoSelect", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Function)
+], MonthViewComponent.prototype, "markDisabled", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "locale", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], MonthViewComponent.prototype, "dateFormatter", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], MonthViewComponent.prototype, "dir", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], MonthViewComponent.prototype, "lockSwipeToPrev", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], MonthViewComponent.prototype, "lockSwipes", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], MonthViewComponent.prototype, "onRangeChanged", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], MonthViewComponent.prototype, "onEventSelected", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], MonthViewComponent.prototype, "onTimeSelected", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], MonthViewComponent.prototype, "onTitleChanged", void 0);
+MonthViewComponent = MonthViewComponent_1 = __decorate([
+    core_1.Component({
+        selector: 'monthview',
+        template: "\n        <div>\n            <ion-slides #monthSlider [loop]=\"true\" [dir]=\"dir\" (ionSlideDidChange)=\"onSlideChanged()\">\n                <ion-slide>\n                    <table *ngIf=\"0===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[0].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[0].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[0].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[0], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"0!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[0].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[0], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n                <ion-slide>\n                    <table *ngIf=\"1===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[1].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[1].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[1].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[1], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"1!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[1].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[1], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n                <ion-slide>\n                    <table *ngIf=\"2===currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr>\n                            <th *ngFor=\"let dayHeader of views[2].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\" tappable (click)=\"select(views[2].dates[row*7+col])\"\n                                [ngClass]=\"getHighlightClass(views[2].dates[row*7+col])\">\n                                <template [ngTemplateOutlet]=\"monthviewDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[2], row: row, col: col}\">\n                                </template>\n                            </td>\n                        </tr>\n                        </tbody>\n                    </table>\n                    <table *ngIf=\"2!==currentViewIndex\" class=\"table table-bordered table-fixed monthview-datetable\">\n                        <thead>\n                        <tr class=\"text-center\">\n                            <th *ngFor=\"let dayHeader of views[2].dayHeaders\">\n                                <small>{{dayHeader}}</small>\n                            </th>\n                        </tr>\n                        </thead>\n                        <tbody>\n                        <tr *ngFor=\"let row of [0,1,2,3,4,5]\">\n                            <td *ngFor=\"let col of [0,1,2,3,4,5,6]\">\n                                <template [ngTemplateOutlet]=\"monthviewInactiveDisplayEventTemplate\"\n                                [ngOutletContext]=\"{view: views[2], row: row, col: col}\">\n                                </template>\n                            </td>\n                        <tr>\n                        </tbody>\n                    </table>\n                </ion-slide>\n            </ion-slides>\n            <template [ngTemplateOutlet]=\"monthviewEventDetailTemplate\"\n            [ngOutletContext]=\"{showEventDetail:showEventDetail, selectedDate: selectedDate, noEventsLabel: noEventsLabel}\">\n            </template>\n        </div>\n    ",
+        styles: ["\n        .text-muted {\n          color: #999;\n        }\n\n        .table-fixed {\n          table-layout: fixed;\n        }\n\n        .table {\n          width: 100%;\n          max-width: 100%;\n          background-color: transparent;\n        }\n\n        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td,\n        .table > tbody > tr > td, .table > tfoot > tr > td {\n          padding: 8px;\n          line-height: 20px;\n          vertical-align: top;\n        }\n\n        .table > thead > tr > th {\n          vertical-align: bottom;\n          border-bottom: 2px solid #ddd;\n        }\n\n        .table > thead:first-child > tr:first-child > th, .table > thead:first-child > tr:first-child > td {\n          border-top: 0\n        }\n\n        .table > tbody + tbody {\n          border-top: 2px solid #ddd;\n        }\n\n        .table-bordered {\n          border: 1px solid #ddd;\n        }\n\n        .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th,\n        .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {\n          border: 1px solid #ddd;\n        }\n\n        .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {\n          border-bottom-width: 2px;\n        }\n\n        .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {\n          background-color: #f9f9f9\n        }\n\n        .monthview-primary-with-event {\n          background-color: #3a87ad;\n          color: white;\n        }\n\n        .monthview-current {\n          background-color: #f0f0f0;\n        }\n\n        .monthview-selected {\n          background-color: #009900;\n          color: white;\n        }\n\n        .monthview-datetable td.monthview-disabled {\n            color: lightgrey;\n            cursor: default;\n        }\n\n        .monthview-datetable th {\n          text-align: center;\n        }\n\n        .monthview-datetable td {\n          cursor: pointer;\n          text-align: center;\n        }\n\n        .monthview-secondary-with-event {\n          background-color: #d9edf7;\n        }\n\n        ::-webkit-scrollbar,\n        *::-webkit-scrollbar {\n          display: none;\n        }\n    "]
+    }),
+    __metadata("design:paramtypes", [calendar_service_1.CalendarService])
+], MonthViewComponent);
 exports.MonthViewComponent = MonthViewComponent;
+var MonthViewComponent_1;
 //# sourceMappingURL=monthview.js.map
