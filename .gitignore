@@ -2,6 +2,6 @@
 /node_modules
 
 /dist
-/aot
+!/aot
 
 /src/*.ngsummary.json
