@@ -650,7 +650,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
                 let endOffset = 0;
                 if (this.hourParts !== 1) {
                     startOffset = Math.round((timeDifferenceStart - startIndex) * this.hourParts);
-                    endOffset = Math.floor((endIndex - timeDifferenceEnd) * this.hourParts);
+                    endOffset = Math.round((endIndex - timeDifferenceEnd) * this.hourParts);
                 }
 
                 let displayEvent = {
@@ -736,12 +736,13 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
             earlyEvent = event2;
             lateEvent = event1;
         }
-
+        let isOverlap: boolean;
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
-            return false;
+            isOverlap = false;
         } else {
-            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
+            isOverlap = !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
+        return isOverlap;
     }
 
     calculatePosition(events:IDisplayEvent[]) {
@@ -776,6 +777,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
                 events[i].position = maxColumn - 1 - events[i].position;
             }
         }
+
     }
 
     private static calculateWidth(orderedEvents:IDisplayEvent[]) {
