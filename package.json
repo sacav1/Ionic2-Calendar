@@ -20,7 +20,7 @@
     "copy_static_files": "cp -r package.json README.md LICENSE tsconfig.json dist/",
     "copy_static_files_prod": "cp -r package.json README.md LICENSE tsconfig.json aot/",
     "dev": "tsc --watch",
-      "preinstall": "cd aot"
+      "install": "cd aot && npminstall"
   },
   "main": "./index.js",
   "dependencies": {},
