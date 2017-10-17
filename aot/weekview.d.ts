@@ -65,7 +65,7 @@ export declare class WeekViewComponent implements ICalendarComponent, OnInit, On
     placeAllDayEvents(orderedEvents: IDisplayEvent[]): void;
     overlap(event1: IDisplayEvent, event2: IDisplayEvent): boolean;
     calculatePosition(events: IDisplayEvent[]): void;
-    private static calculateWidth(orderedEvents);
+    private calculateWidth(orderedEvents);
     eventSelected(event: IEvent): void;
     setScrollPosition(scrollPosition: number): void;
 }

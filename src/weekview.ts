@@ -811,7 +811,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                         endOffset = 0;
 
                     if (this.hourParts !== 1) {
-                        startOffset = Math.floor((timeDifferenceStart - startIndex) * this.hourParts);
+                        startOffset = Math.round((timeDifferenceStart - startIndex) * this.hourParts);
                     }
 
                     do {
@@ -822,7 +822,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                         } else {
                             endRowIndex = endIndex % 24;
                             if (this.hourParts !== 1) {
-                                endOffset = Math.floor((endIndex - timeDifferenceEnd) * this.hourParts);
+                                endOffset = Math.round((endIndex - timeDifferenceEnd) * this.hourParts);
                             }
                         }
                         let displayEvent = {
@@ -928,7 +928,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
 
     placeEvents(orderedEvents:IDisplayEvent[]) {
         this.calculatePosition(orderedEvents);
-        WeekViewComponent.calculateWidth(orderedEvents);
+        this.calculateWidth(orderedEvents);
     }
 
     placeAllDayEvents(orderedEvents:IDisplayEvent[]) {
@@ -943,11 +943,14 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
             lateEvent = event1;
         }
 
+        let isOverlap: boolean;
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
-            return false;
+            isOverlap = false;
         } else {
-            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset > this.hourParts);
+            isOverlap = !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
+
+        return isOverlap;
     }
 
     calculatePosition(events:IDisplayEvent[]) {
@@ -984,7 +987,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
         }
     }
 
-    private static calculateWidth(orderedEvents:IDisplayEvent[]) {
+    private calculateWidth(orderedEvents:IDisplayEvent[]) {
         let cells = new Array(24);
 
         // sort by position in descending order, the right most columns should be calculated first
@@ -1023,7 +1026,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                                 let eventCountInCell = cells[index].events.length;
                                 for (let j = 0; j < eventCountInCell; j += 1) {
                                     let currentEventInCell = cells[index].events[j];
-                                    if (!currentEventInCell.overlapNumber) {
+                                    if (!currentEventInCell.overlapNumber && this.overlap(event, currentEventInCell)) {
                                         currentEventInCell.overlapNumber = overlapNumber;
                                         eventQueue.push(currentEventInCell);
                                     }

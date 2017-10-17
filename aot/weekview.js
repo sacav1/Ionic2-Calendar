@@ -271,7 +271,7 @@ var WeekViewComponent = (function () {
                     }
                     var startIndex = Math.floor(timeDifferenceStart), endIndex = Math.ceil(timeDifferenceEnd - eps), startRowIndex = startIndex % 24, dayIndex = Math.floor(startIndex / 24), endOfDay = dayIndex * 24, startOffset = 0, endOffset = 0;
                     if (this.hourParts !== 1) {
-                        startOffset = Math.floor((timeDifferenceStart - startIndex) * this.hourParts);
+                        startOffset = Math.round((timeDifferenceStart - startIndex) * this.hourParts);
                     }
                     do {
                         endOfDay += 24;
@@ -282,7 +282,7 @@ var WeekViewComponent = (function () {
                         else {
                             endRowIndex = endIndex % 24;
                             if (this.hourParts !== 1) {
-                                endOffset = Math.floor((endIndex - timeDifferenceEnd) * this.hourParts);
+                                endOffset = Math.round((endIndex - timeDifferenceEnd) * this.hourParts);
                             }
                         }
                         var displayEvent = {
@@ -374,7 +374,7 @@ var WeekViewComponent = (function () {
     };
     WeekViewComponent.prototype.placeEvents = function (orderedEvents) {
         this.calculatePosition(orderedEvents);
-        WeekViewComponent.calculateWidth(orderedEvents);
+        this.calculateWidth(orderedEvents);
     };
     WeekViewComponent.prototype.placeAllDayEvents = function (orderedEvents) {
         this.calculatePosition(orderedEvents);
@@ -385,12 +385,14 @@ var WeekViewComponent = (function () {
             earlyEvent = event2;
             lateEvent = event1;
         }
+        var isOverlap;
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
-            return false;
+            isOverlap = false;
         }
         else {
-            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset > this.hourParts);
+            isOverlap = !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
+        return isOverlap;
     };
     WeekViewComponent.prototype.calculatePosition = function (events) {
         var len = events.length, maxColumn = 0, isForbidden = new Array(len);
@@ -422,7 +424,7 @@ var WeekViewComponent = (function () {
             }
         }
     };
-    WeekViewComponent.calculateWidth = function (orderedEvents) {
+    WeekViewComponent.prototype.calculateWidth = function (orderedEvents) {
         var cells = new Array(24);
         orderedEvents.sort(function (eventA, eventB) {
             return eventB.position - eventA.position;
@@ -458,7 +460,7 @@ var WeekViewComponent = (function () {
                                 var eventCountInCell = cells[index].events.length;
                                 for (var j = 0; j < eventCountInCell; j += 1) {
                                     var currentEventInCell = cells[index].events[j];
-                                    if (!currentEventInCell.overlapNumber) {
+                                    if (!currentEventInCell.overlapNumber && this.overlap(event_3, currentEventInCell)) {
                                         currentEventInCell.overlapNumber = overlapNumber;
                                         eventQueue.push(currentEventInCell);
                                     }

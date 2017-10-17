@@ -722,7 +722,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
 
     placeEvents(orderedEvents:IDisplayEvent[]) {
         this.calculatePosition(orderedEvents);
-        DayViewComponent.calculateWidth(orderedEvents);
+        this.calculateWidth(orderedEvents);
     }
 
     placeAllDayEvents(orderedEvents:IDisplayEvent[]) {
@@ -730,6 +730,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
     }
 
     overlap(event1:IDisplayEvent, event2:IDisplayEvent):boolean {
+        // console.log('overlap ??????');
         let earlyEvent = event1,
             lateEvent = event2;
         if (event1.startIndex > event2.startIndex || (event1.startIndex === event2.startIndex && event1.startOffset > event2.startOffset)) {
@@ -737,11 +738,14 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
             lateEvent = event1;
         }
         let isOverlap: boolean;
+        // console.log('earlyEvent', earlyEvent, earlyEvent.event.startTime+' >> '+earlyEvent.event.endTime);
+        // console.log('lateEvent', lateEvent, lateEvent.event.startTime+' >> '+lateEvent.event.endTime);
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
             isOverlap = false;
         } else {
             isOverlap = !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
+        // console.log('=> isOverlap', isOverlap);
         return isOverlap;
     }
 
@@ -780,7 +784,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
 
     }
 
-    private static calculateWidth(orderedEvents:IDisplayEvent[]) {
+    private calculateWidth(orderedEvents:IDisplayEvent[]) {
         let cells:{ calculated: boolean; events: IDisplayEvent[]; }[] = new Array(24);
 
         // sort by position in descending order, the right most columns should be calculated first
@@ -804,23 +808,36 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
         }
 
         let i = 0;
+        // console.log('cells', cells);
+        // console.log('orderedEvents', orderedEvents);
+        // console.log('len', len);
         while (i < len) {
+            // console.log('- i : '+i);
             let event = orderedEvents[i];
+            // console.log('- event.overlapNumber : '+event.overlapNumber);
             if (!event.overlapNumber) {
                 let overlapNumber = event.position + 1;
+                // console.log('- event : '+event.event.startTime+' >> '+event.event.endTime);
+                // console.log('- event.position : '+event.position);
                 event.overlapNumber = overlapNumber;
+                // console.log('- init overlapNumber : '+overlapNumber, event);
                 let eventQueue = [event];
                 while ((event = eventQueue.shift())) {
                     let index = event.startIndex;
+                    // console.log('-- event : '+event.event.startTime+' >> '+event.event.endTime);
+                    // console.log('-- index : '+index);
                     while (index < event.endIndex) {
                         if (!cells[index].calculated) {
                             cells[index].calculated = true;
                             if (cells[index].events) {
                                 let eventCountInCell = cells[index].events.length;
+                                // console.log('-- eventCountInCell : ',eventCountInCell);
                                 for (let j = 0; j < eventCountInCell; j += 1) {
                                     let currentEventInCell = cells[index].events[j];
-                                    if (!currentEventInCell.overlapNumber) {
+                                    // console.log('--- currentEventInCell '+currentEventInCell.event.startTime+' >> '+currentEventInCell.event.endTime+' index : '+index+' j : '+j);
+                                    if (!currentEventInCell.overlapNumber && this.overlap(event, currentEventInCell)) {
                                         currentEventInCell.overlapNumber = overlapNumber;
+                                        // console.log('---update overlapNumber : '+ overlapNumber);
                                         eventQueue.push(currentEventInCell);
                                     }
                                 }

@@ -212,7 +212,7 @@ var DayViewComponent = (function () {
                 var endOffset = 0;
                 if (this.hourParts !== 1) {
                     startOffset = Math.round((timeDifferenceStart - startIndex) * this.hourParts);
-                    endOffset = Math.floor((endIndex - timeDifferenceEnd) * this.hourParts);
+                    endOffset = Math.round((endIndex - timeDifferenceEnd) * this.hourParts);
                 }
                 var displayEvent = {
                     event: event_1,
@@ -274,7 +274,7 @@ var DayViewComponent = (function () {
     };
     DayViewComponent.prototype.placeEvents = function (orderedEvents) {
         this.calculatePosition(orderedEvents);
-        DayViewComponent.calculateWidth(orderedEvents);
+        this.calculateWidth(orderedEvents);
     };
     DayViewComponent.prototype.placeAllDayEvents = function (orderedEvents) {
         this.calculatePosition(orderedEvents);
@@ -285,12 +285,14 @@ var DayViewComponent = (function () {
             earlyEvent = event2;
             lateEvent = event1;
         }
+        var isOverlap;
         if (earlyEvent.endIndex <= lateEvent.startIndex) {
-            return false;
+            isOverlap = false;
         }
         else {
-            return !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
+            isOverlap = !(earlyEvent.endIndex - lateEvent.startIndex === 1 && earlyEvent.endOffset + lateEvent.startOffset >= this.hourParts);
         }
+        return isOverlap;
     };
     DayViewComponent.prototype.calculatePosition = function (events) {
         var len = events.length, maxColumn = 0, col, isForbidden = new Array(len);
@@ -321,7 +323,7 @@ var DayViewComponent = (function () {
             }
         }
     };
-    DayViewComponent.calculateWidth = function (orderedEvents) {
+    DayViewComponent.prototype.calculateWidth = function (orderedEvents) {
         var cells = new Array(24);
         orderedEvents.sort(function (eventA, eventB) {
             return eventB.position - eventA.position;
@@ -357,7 +359,7 @@ var DayViewComponent = (function () {
                                 var eventCountInCell = cells[index].events.length;
                                 for (var j = 0; j < eventCountInCell; j += 1) {
                                     var currentEventInCell = cells[index].events[j];
-                                    if (!currentEventInCell.overlapNumber) {
+                                    if (!currentEventInCell.overlapNumber && this.overlap(event_3, currentEventInCell)) {
                                         currentEventInCell.overlapNumber = overlapNumber;
                                         eventQueue.push(currentEventInCell);
                                     }
