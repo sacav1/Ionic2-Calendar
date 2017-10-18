@@ -738,12 +738,19 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                 rows[hour][day].events = [];
             }
         }
+        // console.log('utcStartTime', utcStartTime);
+        // console.log('utcEndTime', utcEndTime);
+        // console.log('oneDay', oneDay);
+
         for (let i = 0; i < len; i += 1) {
             let event = eventSource[i];
             let eventStartTime = new Date(event.startTime.getTime());
             let eventEndTime = new Date(event.endTime.getTime());
 
             if (event.allDay) {
+                console.log('------- event', event);
+                console.log('eventStartTime', eventStartTime, eventStartTime.getTime());
+                console.log('eventEndTime', eventEndTime, utcStartTime.getTime());
                 if (eventEndTime <= utcStartTime || eventStartTime >= utcEndTime) {
                     continue;
                 } else {
@@ -753,7 +760,8 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                     if (eventStartTime <= utcStartTime) {
                         allDayStartIndex = 0;
                     } else {
-                        allDayStartIndex = Math.floor((eventStartTime.getTime() - utcStartTime.getTime()) / oneDay);
+                        allDayStartIndex = Math.round((eventStartTime.getTime() - utcStartTime.getTime()) / oneDay);
+                        // console.log('(eventStartTime.getTime() - utcStartTime.getTime()) / oneDay', (eventStartTime.getTime() - utcStartTime.getTime()) / oneDay);
                     }
 
                     let allDayEndIndex:number;
@@ -761,6 +769,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                         allDayEndIndex = Math.ceil((utcEndTime.getTime() - utcStartTime.getTime()) / oneDay);
                     } else {
                         allDayEndIndex = Math.ceil((eventEndTime.getTime() - utcStartTime.getTime()) / oneDay);
+                        // console.log('(eventEndTime.getTime() - utcStartTime.getTime()) / oneDay', (eventEndTime.getTime() - utcStartTime.getTime()) / oneDay);
                     }
 
                     let displayAllDayEvent:IDisplayEvent = {
@@ -768,6 +777,7 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
                         startIndex: allDayStartIndex,
                         endIndex: allDayEndIndex
                     };
+                    // console.log('displayAllDayEvent', displayAllDayEvent);
 
                     let eventSet = dates[allDayStartIndex].events;
                     if (eventSet) {

@@ -835,6 +835,7 @@ export class DayViewComponent implements ICalendarComponent, OnInit, OnChanges {
                                 for (let j = 0; j < eventCountInCell; j += 1) {
                                     let currentEventInCell = cells[index].events[j];
                                     // console.log('--- currentEventInCell '+currentEventInCell.event.startTime+' >> '+currentEventInCell.event.endTime+' index : '+index+' j : '+j);
+                                    // test si pas d'overlap entre les deux events pour que si on ait 1x 8h - 11h05 et 2x 11h05 - 12h les deux de 11h - 12h soient bien en 50% mais pas le 8h - 11h
                                     if (!currentEventInCell.overlapNumber && this.overlap(event, currentEventInCell)) {
                                         currentEventInCell.overlapNumber = overlapNumber;
                                         // console.log('---update overlapNumber : '+ overlapNumber);
