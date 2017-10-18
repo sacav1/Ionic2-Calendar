@@ -747,17 +747,15 @@ export class WeekViewComponent implements ICalendarComponent, OnInit, OnChanges 
             let eventStartTime = new Date(event.startTime.getTime());
             let eventEndTime = new Date(event.endTime.getTime());
 
-            // si evenement sur toute la journée alors on utilise la version UTC de ses dates de debut et fin pour être raccord avec les dates de debut et fin de range qui sont elles mises en UTC
-            // sinon pb de décalage dans le calcul du timeDiff
             if (event.allDay) {
                 eventStartTime = new Date(Date.UTC(eventStartTime.getFullYear(), eventStartTime.getMonth(), eventStartTime.getDate()));
                 eventEndTime = new Date(Date.UTC(eventEndTime.getFullYear(), eventEndTime.getMonth(), eventEndTime.getDate()));
             }
 
             if (event.allDay) {
-                console.log('------- event', event);
-                console.log('eventStartTime', eventStartTime, eventStartTime.getTime());
-                console.log('eventEndTime', eventEndTime, utcStartTime.getTime());
+                // console.log('------- event', event);
+                // console.log('eventStartTime', eventStartTime, eventStartTime.getTime());
+                // console.log('eventEndTime', eventEndTime, utcStartTime.getTime());
                 if (eventEndTime <= utcStartTime || eventStartTime >= utcEndTime) {
                     continue;
                 } else {
