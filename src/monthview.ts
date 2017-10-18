@@ -526,12 +526,29 @@ export class MonthViewComponent implements ICalendarComponent, OnInit, OnChanges
             }
         }
 
+        // console.log('startTime', startTime);
+        // console.log('utcStartTime', utcStartTime);
+        // console.log('endTime', endTime);
+        // console.log('utcEndTime', utcEndTime);
+        // console.log('oneDay', oneDay);
+
         for (let i = 0; i < len; i += 1) {
             let event = eventSource[i],
                 eventStartTime = new Date(event.startTime.getTime()),
                 eventEndTime = new Date(event.endTime.getTime()),
                 st:Date,
                 et:Date;
+
+            // console.log('----------- event', event);
+            // console.log('eventStartTime', eventStartTime, new Date(Date.UTC(eventStartTime.getFullYear(), eventStartTime.getMonth(), eventStartTime.getDate())));
+            // console.log('eventEndTime', eventEndTime, new Date(Date.UTC(eventEndTime.getFullYear(), eventEndTime.getMonth(), eventEndTime.getDate())));
+
+            // si evenement sur toute la journée alors on utilise la version UTC de ses dates de debut et fin pour être raccord avec les dates de debut et fin de range qui sont elles mises en UTC
+            // sinon pb de décalage dans le calcul du timeDiff
+            if (event.allDay) {
+                eventStartTime = new Date(Date.UTC(eventStartTime.getFullYear(), eventStartTime.getMonth(), eventStartTime.getDate()));
+                eventEndTime = new Date(Date.UTC(eventEndTime.getFullYear(), eventEndTime.getMonth(), eventEndTime.getDate()));
+            }
 
             if (event.allDay) {
                 if (eventEndTime <= utcStartTime || eventStartTime >= utcEndTime) {
@@ -555,9 +572,15 @@ export class MonthViewComponent implements ICalendarComponent, OnInit, OnChanges
                 timeDifferenceStart = 0;
             } else {
                 timeDiff = eventStartTime.getTime() - st.getTime();
+                // console.log('eventStartTime.getTime()', eventStartTime.getTime());
+                // console.log('st.getTime()', st.getTime());
                 if (!event.allDay) {
                     timeDiff = timeDiff - (eventStartTime.getTimezoneOffset() - st.getTimezoneOffset()) * 60000;
                 }
+                // console.log('eventStartTime.getTimezoneOffset()', eventStartTime.getTimezoneOffset());
+                // console.log('st.getTimezoneOffset()', st.getTimezoneOffset());
+                // console.log('timeDiff - (eventStartTime.getTimezoneOffset() - st.getTimezoneOffset()) * 60000', timeDiff - (eventStartTime.getTimezoneOffset() - st.getTimezoneOffset()) * 60000);
+                // console.log('timeDiff', timeDiff);
                 timeDifferenceStart = timeDiff / oneDay;
             }
 
@@ -577,6 +600,10 @@ export class MonthViewComponent implements ICalendarComponent, OnInit, OnChanges
             }
 
             let index = Math.floor(timeDifferenceStart);
+
+            // console.log('timeDifferenceStart', timeDifferenceStart);
+            // console.log('index', index);
+
             while (index < timeDifferenceEnd - eps) {
                 dates[index].hasEvent = true;
                 let eventSet = dates[index].events;
@@ -596,7 +623,7 @@ export class MonthViewComponent implements ICalendarComponent, OnInit, OnChanges
                 dates[r].events.sort(this.compareEvent);
             }
         }
-
+        // console.log('dates', dates);
         if (this.autoSelect) {
             let findSelected = false;
             for (let r = 0; r < 42; r += 1) {
