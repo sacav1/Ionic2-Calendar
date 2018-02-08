@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import 'intl';
-import 'intl/locale-data/jsonp/en';
+import 'intl/locale-data/jsonp/fr-FR';
 import { MonthViewComponent } from './monthview';
 import { WeekViewComponent } from './weekview';
 import { DayViewComponent } from './dayview';

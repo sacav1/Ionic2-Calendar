@@ -23,6 +23,9 @@ export declare class DayViewComponent implements ICalendarComponent, OnInit, OnC
     preserveScrollPosition: boolean;
     lockSwipeToPrev: boolean;
     lockSwipes: boolean;
+    startHour: number;
+    endHour: number;
+    spaceBetween: number;
     onRangeChanged: EventEmitter<IRange>;
     onEventSelected: EventEmitter<IEvent>;
     onTimeSelected: EventEmitter<ITimeSelected>;
@@ -44,6 +47,7 @@ export declare class DayViewComponent implements ICalendarComponent, OnInit, OnC
     private initScrollPosition;
     private formatTitle;
     private formatHourColumnLabel;
+    private hourRange;
     constructor(calendarService: CalendarService, elm: ElementRef);
     ngOnInit(): void;
     ngAfterViewInit(): void;
@@ -51,7 +55,7 @@ export declare class DayViewComponent implements ICalendarComponent, OnInit, OnC
     ngOnDestroy(): void;
     onSlideChanged(): void;
     move(direction: number): void;
-    static createDateObjects(startTime: Date): IDayViewRow[];
+    static createDateObjects(startTime: Date, startHour: number, endHour: number): IDayViewRow[];
     private getHourColumnLabels();
     getViewData(startTime: Date): IDayView;
     getRange(currentDate: Date): IRange;
@@ -64,7 +68,7 @@ export declare class DayViewComponent implements ICalendarComponent, OnInit, OnC
     placeAllDayEvents(orderedEvents: IDisplayEvent[]): void;
     overlap(event1: IDisplayEvent, event2: IDisplayEvent): boolean;
     calculatePosition(events: IDisplayEvent[]): void;
-    private calculateWidth(orderedEvents);
+    private static calculateWidth(orderedEvents, size, hourParts);
     eventSelected(event: IEvent): void;
     setScrollPosition(scrollPosition: number): void;
 }

@@ -160,6 +160,9 @@ export declare class CalendarComponent implements OnInit {
     lockSwipeToPrev: boolean;
     lockSwipes: boolean;
     locale: string;
+    startHour: number;
+    endHour: number;
+    spaceBetween: number;
     onCurrentDateChanged: EventEmitter<Date>;
     onRangeChanged: EventEmitter<IRange>;
     onEventSelected: EventEmitter<IEvent>;

@@ -23,6 +23,7 @@ export declare class MonthViewComponent implements ICalendarComponent, OnInit, O
     dir: string;
     lockSwipeToPrev: boolean;
     lockSwipes: boolean;
+    spaceBetween: number;
     onRangeChanged: EventEmitter<IRange>;
     onEventSelected: EventEmitter<IEvent>;
     onTimeSelected: EventEmitter<ITimeSelected>;

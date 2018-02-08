@@ -54,9 +54,9 @@ var initPositionScrollComponent = (function (_super) {
         { type: ElementRef, },
     ]; };
     initPositionScrollComponent.propDecorators = {
-        'initPosition': [{ type: Input },],
-        'emitEvent': [{ type: Input },],
-        'onScroll': [{ type: Output },],
+        "initPosition": [{ type: Input },],
+        "emitEvent": [{ type: Input },],
+        "onScroll": [{ type: Output },],
     };
     return initPositionScrollComponent;
 }(Scroll));

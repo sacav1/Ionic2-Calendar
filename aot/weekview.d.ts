@@ -25,6 +25,9 @@ export declare class WeekViewComponent implements ICalendarComponent, OnInit, On
     preserveScrollPosition: boolean;
     lockSwipeToPrev: boolean;
     lockSwipes: boolean;
+    startHour: number;
+    endHour: number;
+    spaceBetween: number;
     onRangeChanged: EventEmitter<IRange>;
     onEventSelected: EventEmitter<IEvent>;
     onTimeSelected: EventEmitter<ITimeSelected>;
@@ -43,6 +46,7 @@ export declare class WeekViewComponent implements ICalendarComponent, OnInit, On
     private formatDayHeader;
     private formatTitle;
     private formatHourColumnLabel;
+    private hourRange;
     constructor(calendarService: CalendarService, elm: ElementRef);
     ngOnInit(): void;
     ngAfterViewInit(): void;
@@ -50,7 +54,7 @@ export declare class WeekViewComponent implements ICalendarComponent, OnInit, On
     ngOnDestroy(): void;
     onSlideChanged(): void;
     move(direction: number): void;
-    static createDateObjects(startTime: Date): IWeekViewRow[][];
+    static createDateObjects(startTime: Date, startHour: number, endHour: number): IWeekViewRow[][];
     static getDates(startTime: Date, n: number): IWeekViewDateRow[];
     private getHourColumnLabels();
     getViewData(startTime: Date): IWeekView;
@@ -58,14 +62,13 @@ export declare class WeekViewComponent implements ICalendarComponent, OnInit, On
     onDataLoaded(): void;
     refreshView(): void;
     getTitle(): string;
-    private static getISO8601WeekNumber(date);
     private static compareEventByStartOffset(eventA, eventB);
     select(selectedTime: Date, events: IDisplayEvent[]): void;
     placeEvents(orderedEvents: IDisplayEvent[]): void;
     placeAllDayEvents(orderedEvents: IDisplayEvent[]): void;
     overlap(event1: IDisplayEvent, event2: IDisplayEvent): boolean;
     calculatePosition(events: IDisplayEvent[]): void;
-    private calculateWidth(orderedEvents);
+    private static calculateWidth(orderedEvents, size, hourParts);
     eventSelected(event: IEvent): void;
     setScrollPosition(scrollPosition: number): void;
 }
