@@ -1,46 +1,49 @@
 {
-  "name": "ionic2-calendar",
-  "version": "0.2.14",
-  "description": "Ionic2 calendar component",
-  "keywords": [
-    "Ionic2",
-    "calendar"
-  ],
-  "author": {
-    "name": "twinsbc"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/twinssbc/Ionic2-Calendar.git"
-  },
-  "scripts": {
-    "build": "rm -rf dist",
-    "build-prod": "rm -rf aot && node_modules/.bin/ngc -p tsconfig-aot.json && node_modules/.bin/ngc src && mv src/*ngfactory.ts aot && rm -r aot/waste",
-    "copy_static_files": "cp -r package.json README.md LICENSE tsconfig.json dist/",
-    "copy_static_files_prod": "cp -r package.json README.md LICENSE tsconfig.json aot/",
-    "dev": "tsc --watch",
-    "build-debug": "npm run build-prod && npm run copy_static_files_prod && cd aot && npm pack"
-  },
-  "main": "./index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "@angular/animations": "4.4.3",
-    "@angular/common": "4.4.3",
-    "@angular/compiler": "4.4.3",
-    "@angular/compiler-cli": "4.4.3",
-    "@angular/core": "4.4.3",
-    "@angular/forms": "4.4.3",
-    "@angular/http": "4.4.3",
-    "@angular/platform-browser": "4.4.3",
-    "@angular/platform-browser-dynamic": "4.4.3",
-    "@angular/platform-server": "4.4.3",
-    "@types/es6-shim": "^0.31.35",
-    "intl": "1.2.5",
-    "ionic-angular": "3.7.1",
-    "rxjs": "5.4.3",
-    "tslint-ionic-rules": "0.0.11",
-    "typescript": "2.5.2",
-    "zone.js": "0.8.18"
-  }
+    "name": "ionic2-calendar",
+    "version": "0.4.2",
+    "description": "Ionic2 calendar component",
+    "keywords": [
+        "Ionic2",
+        "calendar"
+    ],
+    "author": {
+        "name": "twinsbc"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/twinssbc/Ionic2-Calendar.git"
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc && cp package.json dist/package.json",
+        "build-prod": "rm -rf aot && node_modules/.bin/ngc -p tsconfig-aot.json",
+        "copy_static_files": "cp -r package.json README.md LICENSE tsconfig.json typings.json typings dist/",
+        "copy_static_files_prod": "cp -r package.json README.md LICENSE tsconfig.json aot/",
+        "dev": "tsc --watch",
+        "********************** ED INSTALL **********************": "",
+        "npm:reinstall": "rm -rf node_modules && npm install",
+        "build-debug": "npm run build-prod && npm run copy_static_files_prod && cd aot && npm pack"
+    },
+    "main": "./index.js",
+    "dependencies": {},
+    "devDependencies": {
+        "@angular/animations": "5.2.4",
+        "@angular/common": "5.2.4",
+        "@angular/compiler": "5.2.4",
+        "@angular/compiler-cli": "5.2.4",
+        "@angular/core": "5.2.4",
+        "@angular/forms": "5.2.4",
+        "@angular/http": "5.2.4",
+        "@angular/platform-browser": "5.2.4",
+        "@angular/platform-browser-dynamic": "5.2.4",
+        "@angular/platform-server": "5.2.4",
+        "@types/es6-shim": "0.31.35",
+        "intl": "1.2.5",
+        "ionic-angular": "3.9.2",
+        "rxjs": "5.5.6",
+        "tslint": "5.9.1",
+        "tslint-ionic-rules": "0.0.13",
+        "typescript": "2.7.1",
+        "zone.js": "0.8.20"
+    }
 }

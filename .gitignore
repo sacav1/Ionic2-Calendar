@@ -1,7 +1,5 @@
-/typings
-/node_modules
-
-/dist
-/aot
-
-/src/*.ngsummary.json
+node_modules/
+.idea/*
+dist/
+aot/
+src/*.ngsummary.json

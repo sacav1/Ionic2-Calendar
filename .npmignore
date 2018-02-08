@@ -1,8 +1,7 @@
-/npm-debug.log
-.idea
-/node_modules
-/demo
-/typings
+npm-debug.log
+.idea/
+node_modules/
+demo/
 
 *.ts
 !*.d.ts
