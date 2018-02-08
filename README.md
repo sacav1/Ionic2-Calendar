@@ -2,6 +2,10 @@
 
 Ionic2 calendar directive
 
+/!\ VERSION SPECIALE ECOLEDIRECTE (correctif bugs en tout genre, gênants dans notre contexte d'utilisation) /!\
+https://github.com/sacav1/Ionic2-Calendar
+Originale : https://twinssbc.github.io/Ionic2-Calendar/
+
 # Demo
 https://twinssbc.github.io/Ionic2-Calendar/demo/
 
