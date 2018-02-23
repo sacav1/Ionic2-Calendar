@@ -15,16 +15,11 @@
         "rootDir": "./src",
         "outDir": "./aot",
         "baseUrl": "."
-
     },
     "files": [
         "src/index.ts"
     ],
     "exclude": [
         "node_modules"
-    ],
-    "angularCompilerOptions": {
-        "skipMetadataEmit" : false,
-        "genDir": "./aot/waste"
-    }
+    ]
 }
