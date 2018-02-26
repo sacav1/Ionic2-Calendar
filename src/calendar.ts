@@ -155,71 +155,78 @@ export enum Step {
 
         <div [ngSwitch]="calendarMode" class="{{calendarMode}}view-container">
             <monthview *ngSwitchCase="'month'"
-                [formatDay]="formatDay"
-                [formatDayHeader]="formatDayHeader"
-                [formatMonthTitle]="formatMonthTitle"
-                [startingDayMonth]="startingDayMonth"
-                [showEventDetail]="showEventDetail"
-                [noEventsLabel]="noEventsLabel"
-                [autoSelect]="autoSelect"
-                [eventSource]="eventSource"
-                [markDisabled]="markDisabled"
-                [monthviewDisplayEventTemplate]="monthviewDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
-                [monthviewInactiveDisplayEventTemplate]="monthviewInactiveDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
-                [monthviewEventDetailTemplate]="monthviewEventDetailTemplate||monthviewDefaultEventDetailTemplate"
-                [locale]="locale"
-                [dateFormatter]="dateFormatter"
-                [dir]="dir"
-                [lockSwipeToPrev]="lockSwipeToPrev"
-                [lockSwipes]="lockSwipes"
-                (onRangeChanged)="rangeChanged($event)"
-                (onEventSelected)="eventSelected($event)"
-                (onTimeSelected)="timeSelected($event)"
-                (onTitleChanged)="titleChanged($event)">
+                       [formatDay]="formatDay"
+                       [formatDayHeader]="formatDayHeader"
+                       [formatMonthTitle]="formatMonthTitle"
+                       [startingDayMonth]="startingDayMonth"
+                       [showEventDetail]="showEventDetail"
+                       [noEventsLabel]="noEventsLabel"
+                       [autoSelect]="autoSelect"
+                       [eventSource]="eventSource"
+                       [markDisabled]="markDisabled"
+                       [monthviewDisplayEventTemplate]="monthviewDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
+                       [monthviewInactiveDisplayEventTemplate]="monthviewInactiveDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
+                       [monthviewEventDetailTemplate]="monthviewEventDetailTemplate||monthviewDefaultEventDetailTemplate"
+                       [locale]="locale"
+                       [dateFormatter]="dateFormatter"
+                       [dir]="dir"
+                       [lockSwipeToPrev]="lockSwipeToPrev"
+                       [lockSwipes]="lockSwipes"
+                       [spaceBetween]="spaceBetween"
+                       (onRangeChanged)="rangeChanged($event)"
+                       (onEventSelected)="eventSelected($event)"
+                       (onTimeSelected)="timeSelected($event)"
+                       (onTitleChanged)="titleChanged($event)">
             </monthview>
             <weekview *ngSwitchCase="'week'"
-                [formatWeekTitle]="formatWeekTitle"
-                [formatWeekViewDayHeader]="formatWeekViewDayHeader"
-                [formatHourColumn]="formatHourColumn"
-                [startingDayWeek]="startingDayWeek"
-                [allDayLabel]="allDayLabel"
-                [hourParts]="hourParts"
-                [eventSource]="eventSource"
-                [markDisabled]="markDisabled"
-                [weekviewAllDayEventTemplate]="weekviewAllDayEventTemplate||defaultAllDayEventTemplate"
-                [weekviewNormalEventTemplate]="weekviewNormalEventTemplate||defaultNormalEventTemplate"
-                [locale]="locale"
-                [dateFormatter]="dateFormatter"
-                [dir]="dir"
-                [scrollToHour]="scrollToHour"
-                [preserveScrollPosition]="preserveScrollPosition"
-                [lockSwipeToPrev]="lockSwipeToPrev"
-                [lockSwipes]="lockSwipes"
-                (onRangeChanged)="rangeChanged($event)"
-                (onEventSelected)="eventSelected($event)"
-                (onTimeSelected)="timeSelected($event)"
-                (onTitleChanged)="titleChanged($event)">
+                      [formatWeekTitle]="formatWeekTitle"
+                      [formatWeekViewDayHeader]="formatWeekViewDayHeader"
+                      [formatHourColumn]="formatHourColumn"
+                      [startingDayWeek]="startingDayWeek"
+                      [allDayLabel]="allDayLabel"
+                      [hourParts]="hourParts"
+                      [eventSource]="eventSource"
+                      [markDisabled]="markDisabled"
+                      [weekviewAllDayEventTemplate]="weekviewAllDayEventTemplate||defaultAllDayEventTemplate"
+                      [weekviewNormalEventTemplate]="weekviewNormalEventTemplate||defaultNormalEventTemplate"
+                      [locale]="locale"
+                      [dateFormatter]="dateFormatter"
+                      [dir]="dir"
+                      [scrollToHour]="scrollToHour"
+                      [preserveScrollPosition]="preserveScrollPosition"
+                      [lockSwipeToPrev]="lockSwipeToPrev"
+                      [lockSwipes]="lockSwipes"
+                      [startHour]="startHour"
+                      [endHour]="endHour"
+                      [spaceBetween]="spaceBetween"
+                      (onRangeChanged)="rangeChanged($event)"
+                      (onEventSelected)="eventSelected($event)"
+                      (onTimeSelected)="timeSelected($event)"
+                      (onTitleChanged)="titleChanged($event)">
             </weekview>
             <dayview *ngSwitchCase="'day'"
-                [formatDayTitle]="formatDayTitle"
-                [formatHourColumn]="formatHourColumn"
-                [allDayLabel]="allDayLabel"
-                [hourParts]="hourParts"
-                [eventSource]="eventSource"
-                [markDisabled]="markDisabled"
-                [dayviewAllDayEventTemplate]="dayviewAllDayEventTemplate||defaultAllDayEventTemplate"
-                [dayviewNormalEventTemplate]="dayviewNormalEventTemplate||defaultNormalEventTemplate"
-                [locale]="locale"
-                [dateFormatter]="dateFormatter"
-                [dir]="dir"
-                [scrollToHour]="scrollToHour"
-                [preserveScrollPosition]="preserveScrollPosition"
-                [lockSwipeToPrev]="lockSwipeToPrev"
-                [lockSwipes]="lockSwipes"
-                (onRangeChanged)="rangeChanged($event)"
-                (onEventSelected)="eventSelected($event)"
-                (onTimeSelected)="timeSelected($event)"
-                (onTitleChanged)="titleChanged($event)">
+                     [formatDayTitle]="formatDayTitle"
+                     [formatHourColumn]="formatHourColumn"
+                     [allDayLabel]="allDayLabel"
+                     [hourParts]="hourParts"
+                     [eventSource]="eventSource"
+                     [markDisabled]="markDisabled"
+                     [dayviewAllDayEventTemplate]="dayviewAllDayEventTemplate||defaultAllDayEventTemplate"
+                     [dayviewNormalEventTemplate]="dayviewNormalEventTemplate||defaultNormalEventTemplate"
+                     [locale]="locale"
+                     [dateFormatter]="dateFormatter"
+                     [dir]="dir"
+                     [scrollToHour]="scrollToHour"
+                     [preserveScrollPosition]="preserveScrollPosition"
+                     [lockSwipeToPrev]="lockSwipeToPrev"
+                     [lockSwipes]="lockSwipes"
+                     [startHour]="startHour"
+                     [endHour]="endHour"
+                     [spaceBetween]="spaceBetween"
+                     (onRangeChanged)="rangeChanged($event)"
+                     (onEventSelected)="eventSelected($event)"
+                     (onTimeSelected)="timeSelected($event)"
+                     (onTitleChanged)="titleChanged($event)">
             </dayview>
         </div>
     `,
@@ -227,40 +234,40 @@ export enum Step {
         :host > div { height: 100%; }
 
         .event-detail-container {
-          border-top: 2px darkgrey solid;
+            border-top: 2px darkgrey solid;
         }
 
         .no-events-label {
-          font-weight: bold;
-          color: darkgrey;
-          text-align: center;
+            font-weight: bold;
+            color: darkgrey;
+            text-align: center;
         }
 
         .event-detail {
-          cursor: pointer;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+            cursor: pointer;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .monthview-eventdetail-timecolumn {
-          width: 110px;
-          overflow: hidden;
+            width: 110px;
+            overflow: hidden;
         }
 
         .calendar-event-inner {
-          overflow: hidden;
-          background-color: #3a87ad;
-          color: white;
-          height: 100%;
-          width: 100%;
-          padding: 2px;
-          line-height: 15px;
+            overflow: hidden;
+            background-color: #3a87ad;
+            color: white;
+            height: 100%;
+            width: 100%;
+            padding: 2px;
+            line-height: 15px;
         }
 
         @media (max-width: 750px) {
-          .calendar-event-inner {
-            font-size: 12px;
-          }
+            .calendar-event-inner {
+                font-size: 12px;
+            }
         }
     `],
     providers: [CalendarService]
@@ -286,10 +293,10 @@ export class CalendarComponent implements OnInit {
     @Input() formatDay:string = 'd';
     @Input() formatDayHeader:string = 'EEE';
     @Input() formatDayTitle:string = 'MMMM dd, yyyy';
-    @Input() formatWeekTitle:string = 'MMMM yyyy, Week $n';
+    @Input() formatWeekTitle:string = 'MMMM yyyy, \'Week\' w';
     @Input() formatMonthTitle:string = 'MMMM yyyy';
     @Input() formatWeekViewDayHeader:string = 'EEE d';
-    @Input() formatHourColumn:string = 'j';
+    @Input() formatHourColumn:string = 'ha';
     @Input() showEventDetail:boolean = true;
     @Input() startingDayMonth:number = 0;
     @Input() startingDayWeek:number = 0;
@@ -313,6 +320,9 @@ export class CalendarComponent implements OnInit {
     @Input() lockSwipeToPrev:boolean = false;
     @Input() lockSwipes:boolean = false;
     @Input() locale:string = "";
+    @Input() startHour:number = 0;
+    @Input() endHour:number = 24;
+    @Input() spaceBetween:number = 0;
 
     @Output() onCurrentDateChanged = new EventEmitter<Date>();
     @Output() onRangeChanged = new EventEmitter<IRange>();
@@ -337,6 +347,8 @@ export class CalendarComponent implements OnInit {
             }
         }
         this.hourParts = 60 / this.step;
+        this.startHour = parseInt(this.startHour.toString());
+        this.endHour = parseInt(this.endHour.toString());
         this.calendarService.queryMode = this.queryMode;
 
         this.currentDateChangedFromChildrenSubscription = this.calendarService.currentDateChangedFromChildren$.subscribe(currentDate => {
