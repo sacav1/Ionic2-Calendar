@@ -22,7 +22,7 @@
         "dev": "tsc --watch",
         "********************** ED INSTALL **********************": "",
         "npm:reinstall": "rm -rf node_modules && npm install",
-        "build-debug": "npm run build-prod && npm run copy_static_files_prod && cd aot && npm pack"
+        "build-prod-ed": "npm run build-prod && npm run copy_static_files_prod && cd aot && npm pack"
     },
     "main": "./index.js",
     "dependencies": {},
